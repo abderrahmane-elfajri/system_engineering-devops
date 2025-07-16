@@ -37,6 +37,46 @@ Desktop Downloads   Library Music Public
 
 The script uses the `ls` command which stands for "list" and displays all files and directories in the current working directory.
 
+### 2-bring_me_home
+A script that changes the working directory to the user's home directory.
+
+**Usage:**
+```bash
+chmod +x ./2-bring_me_home
+source ./2-bring_me_home
+```
+
+**Expected behavior:**
+```bash
+julien@ubuntu:/tmp$ pwd
+/tmp
+julien@ubuntu:/tmp$ source ./2-bring_me_home
+julien@ubuntu:~$ pwd
+/home/julien
+```
+
+The script uses the `cd` command without any arguments, which is the standard way to change to the home directory without using shell variables like $HOME.
+
+### 3-listfiles
+A script that displays the current directory contents in a long format.
+
+**Usage:**
+```bash
+chmod +x ./3-listfiles
+./3-listfiles
+```
+
+**Expected output:**
+```
+total 32
+-rwxr-xr-x@ 1 sylvain staff 18 Jan 25 00:19 0-current_working_directory
+-rwxr-xr-x@ 1 sylvain staff 19 Jan 25 00:23 1-listit
+-rwxr-xr-x@ 1 sylvain staff 18 Jan 25 00:29 2-bring_me_home
+-rwxr-xr-x@ 1 sylvain staff 18 Jan 25 00:39 3-listfiles
+```
+
+The script uses the `ls -l` command which displays detailed information about files including permissions, ownership, size, and modification date.
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on shell basics and Linux command line fundamentals.
