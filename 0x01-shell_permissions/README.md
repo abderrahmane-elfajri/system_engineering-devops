@@ -51,6 +51,62 @@ julien
 
 The script uses the `whoami` command which displays the username of the current effective user.
 
+### 2-groups
+A script that prints all the groups the current user is part of.
+
+**Usage:**
+```bash
+chmod +x ./2-groups
+./2-groups
+```
+
+**Expected output:**
+```
+julien adm cdrom sudo dip plugdev lpadmin sambashare
+```
+
+**Command used:** `groups`
+
+**Expected behavior:**
+- Prints all groups the current user belongs to
+- Output varies depending on the user and system configuration
+- Uses the `groups` command to list user group memberships
+- Shows both primary and supplementary groups
+
+### 3-new_owner
+A script that changes the owner of the file hello to the user betty.
+
+**Usage:**
+```bash
+chmod +x ./3-new_owner
+sudo ./3-new_owner
+```
+
+**Expected behavior:**
+```bash
+# Before running the script
+julien@ubuntu:/tmp/h$ ls -l
+total 4
+-rwxrw-r-- 1 julien julien 30 Sep 20 14:23 3-new_owner
+-rw-rw-r-- 1 julien julien  0 Sep 20 14:18 hello
+
+# After running the script
+julien@ubuntu:/tmp/h$ sudo ./3-new_owner 
+julien@ubuntu:/tmp/h$ ls -l
+total 4
+-rwxrw-r-- 1 julien julien 30 Sep 20 14:23 3-new_owner
+-rw-rw-r-- 1 betty  julien  0 Sep 20 14:18 hello
+```
+
+**Command used:** `chown betty hello`
+
+**Expected behavior:**
+- Changes the owner of the file "hello" to user "betty"
+- Requires sudo privileges to change file ownership
+- Uses the `chown` command (change owner)
+- Assumes the file "hello" exists in the current directory
+- Assumes user "betty" exists on the system
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on shell permissions and user management fundamentals.
