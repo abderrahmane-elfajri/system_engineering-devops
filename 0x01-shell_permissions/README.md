@@ -28,6 +28,29 @@ tail -1 0-iam_betty | wc -c
 
 The script uses the `su` command which stands for "switch user" and allows switching to another user account.
 
+### 1-who_am_i
+A script that prints the effective username of the current user.
+
+**Usage:**
+```bash
+chmod +x ./1-who_am_i
+./1-who_am_i
+```
+
+**Expected output:**
+```
+julien
+```
+
+**Command used:** `whoami`
+
+**Expected behavior:**
+- Prints the effective username of the current user
+- Works with any user account
+- Uses the `whoami` command to get the current user
+
+The script uses the `whoami` command which displays the username of the current effective user.
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on shell permissions and user management fundamentals.
