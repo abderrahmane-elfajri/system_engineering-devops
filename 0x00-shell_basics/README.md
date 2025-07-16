@@ -77,6 +77,29 @@ total 32
 
 The script uses the `ls -l` command which displays detailed information about files including permissions, ownership, size, and modification date.
 
+### 4-listmorefiles
+A script that displays the current directory contents, including hidden files (those starting with .), in long format.
+
+**Usage:**
+```bash
+chmod +x ./4-listmorefiles
+./4-listmorefiles
+```
+
+**Expected output:**
+```
+total 32
+drwxr-xr-x@ 6 sylvain staff 204 Jan 25 00:29 .
+drwxr-xr-x@ 43 sylvain staff 1462 Jan 25 00:19 ..
+-rwxr-xr-x@ 1 sylvain staff 18 Jan 25 00:19 0-current_working_directory
+-rwxr-xr-x@ 1 sylvain staff 19 Jan 25 00:23 1-listit
+-rwxr-xr-x@ 1 sylvain staff 18 Jan 25 00:29 2-bring_me_home
+-rwxr-xr-x@ 1 sylvain staff 18 Jan 25 00:39 3-listfiles
+-rwxr-xr-x@ 1 sylvain staff 18 Jan 25 00:41 4-listmorefiles
+```
+
+The script uses the `ls -la` command which displays detailed information about all files including hidden files (starting with .) in long format.
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on shell basics and Linux command line fundamentals.
