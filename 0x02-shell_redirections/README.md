@@ -211,6 +211,35 @@ chmod +x ./5-firstlines
 - Complementary to the `tail` command used in the previous task
 - The output will vary depending on the system's configuration
 
+### 6-third_line
+A script that displays the third line of the file `iacta`.
+
+**Usage:**
+```bash
+chmod +x ./6-third_line
+./6-third_line
+```
+
+**Expected output:**
+```
+Alea iacta est ("The die is cast") is a Latin phrase attributed by Suetonius
+```
+
+**Command used:** `head -3 iacta | tail -1`
+
+**Expected behavior:**
+- Displays only the third line of the file `iacta`
+- Uses `head -3` to get the first 3 lines, then pipes to `tail -1` to get the last line of those 3
+- Does not use `sed` as specified in the requirements
+- The file `iacta` must be in the working directory
+- The output will vary depending on the content of the file `iacta`
+- This technique combines `head` and `tail` with piping to extract a specific line
+
+**How it works:**
+1. `head -3 iacta` gets the first 3 lines of the file
+2. `|` pipes that output to the next command
+3. `tail -1` gets the last line from the piped input (which is the 3rd line of the original file)
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on shell I/O redirections and filters.
