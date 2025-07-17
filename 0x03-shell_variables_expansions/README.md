@@ -460,6 +460,57 @@ julien@production-503e7013:~$
 - Result is truncated (not rounded) if there's a remainder
 - For example: `42784 / 32 = 1337` (exact division)
 
+### 10-love_exponent_breath
+A script that displays the result of `BREATH` raised to the power of `LOVE`.
+
+**Usage:**
+```bash
+export BREATH=4
+export LOVE=3
+chmod +x ./10-love_exponent_breath
+./10-love_exponent_breath
+```
+
+**Expected output:**
+```
+64
+```
+(Result of BREATH ** LOVE, i.e., 4^3 = 64)
+
+**Example:**
+```bash
+julien@production-503e7013:~/$ export BREATH=4
+julien@production-503e7013:~/$ export LOVE=3
+julien@production-503e7013:~/$ ./10-love_exponent_breath
+64
+julien@production-503e7013:~/$
+```
+
+**Command used:** `echo $((BREATH ** LOVE))`
+
+**Expected behavior:**
+- Reads values from environment variables `BREATH` and `LOVE`
+- Performs exponentiation using arithmetic expansion
+- Prints the result followed by a newline
+- Uses `$((expression))` with `**` operator for exponentiation in bash
+- Assumes both variables contain numeric values suitable for exponentiation
+
+**Important notes:**
+- Both `BREATH` and `LOVE` variables must be set in the environment before execution
+- Uses arithmetic expansion `$((BREATH ** LOVE))` for the exponentiation
+- The `**` operator performs exponentiation (power operation)
+- The result is automatically followed by a newline from `echo`
+- Demonstrates exponentiation operations with environment variables
+
+**Arithmetic exponentiation:**
+- `**` operator performs exponentiation in bash arithmetic expansion
+- Syntax: `base ** exponent`
+- For example: `4 ** 3 = 64` (4 to the power of 3)
+- Can handle both positive and negative exponents
+
+**Poetic connection:**
+The script title references the beautiful quote about love being fundamental to existence, just as exponentiation is a fundamental mathematical operation that represents repeated multiplication.
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on shell variables, expansions, and aliases.
