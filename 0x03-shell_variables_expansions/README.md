@@ -251,7 +251,6 @@ DEFAULTS_PATH=/usr/share/gconf/ubuntu.default.path
 DESKTOP_SESSION=ubuntu
 [...]
 ```
-(Output will vary based on your system's configuration and current shell state)
 
 **Command used:** `set`
 
@@ -275,6 +274,50 @@ DESKTOP_SESSION=ubuntu
 - `printenv`/`env`: Shows only environment variables
 - `set`: Shows everything (local variables + environment variables + functions)
 - `declare`: Similar to `set` but with type information
+
+### 6-create_local_variable
+A script that creates a new local variable named `BEST` with the value `School`.
+
+**Usage:**
+```bash
+source ./6-create_local_variable
+```
+or
+```bash
+. ./6-create_local_variable
+```
+
+**Expected behavior:**
+- Creates a local variable `BEST` with the value `School`
+- The variable is only available in the current shell session
+- Must be sourced (not executed) to make the variable available in the current shell
+- The variable is not exported, so it won't be inherited by child processes
+
+**Variable specifications:**
+- **Name**: BEST
+- **Value**: School
+- **Type**: Local variable (not environment variable)
+
+**Command used:** `BEST="School"`
+
+**Verification:**
+After sourcing the script, you can verify the variable exists:
+```bash
+$ . ./6-create_local_variable
+$ echo $BEST
+School
+```
+
+**Important notes:**
+- This creates a local variable, not an environment variable
+- Local variables are specific to the current shell process
+- They are not inherited by child processes (unlike environment variables created with `export`)
+- The script must be sourced to affect the current shell environment
+- Simple assignment syntax `VARIABLE="value"` creates local variables
+
+**Difference from environment variables:**
+- Local variable: `BEST="School"` (available only in current shell)
+- Environment variable: `export BEST="School"` (inherited by child processes)
 
 ## About
 
