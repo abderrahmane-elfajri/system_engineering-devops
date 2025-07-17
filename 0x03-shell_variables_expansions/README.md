@@ -215,6 +215,67 @@ LOGNAME=franky
 - `env` - also lists environment variables
 - `set` - shows all variables (including shell variables, not just environment variables)
 
+### 5-local_variables
+A script that lists all local variables, environment variables, and shell functions.
+
+**Usage:**
+```bash
+chmod +x ./5-local_variables
+./5-local_variables
+```
+or
+```bash
+. ./5-local_variables
+```
+
+**Expected output:**
+```
+BASH=/bin/bash
+BASHOPTS=checkwinsize:cmdhist:complete_fullquote:expand_aliases:extglob:extquote:force_fignore:histappend:interactive_comments:progcomp:promptvars:sourcepath
+BASH_ALIASES=()
+BASH_ARGC=()
+BASH_ARGV=()
+BASH_CMDS=()
+BASH_COMPLETION_COMPAT_DIR=/etc/bash_completion.d
+BASH_LINENO=()
+BASH_REMATCH=()
+BASH_SOURCE=()
+BASH_VERSINFO=([0]="4" [1]="3" [2]="46" [3]="1" [4]="release" [5]="x86_64-pc-linux-gnu")
+BASH_VERSION='4.3.46(1)-release'
+CLUTTER_IM_MODULE=xim
+COLUMNS=133
+COMPIZ_CONFIG_PROFILE=ubuntu
+COMP_WORDBREAKS=$' \t\n"\'><=;|&(:'
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-Fg27Lr20bq
+DEFAULTS_PATH=/usr/share/gconf/ubuntu.default.path
+DESKTOP_SESSION=ubuntu
+[...]
+```
+(Output will vary based on your system's configuration and current shell state)
+
+**Command used:** `set`
+
+**Expected behavior:**
+- Lists all local variables specific to the current shell process
+- Lists all environment variables (inherited by child processes)
+- Lists all defined shell functions
+- Shows more comprehensive output than `printenv` or `env`
+- Includes shell-specific variables like BASH_VERSION, BASH_ALIASES, etc.
+- Displays arrays and functions in addition to simple variables
+- Output varies depending on the shell configuration and defined functions
+
+**What `set` shows:**
+1. **Environment Variables**: Like PATH, HOME, USER (also shown by `printenv`)
+2. **Local Variables**: Shell-specific variables not exported to child processes
+3. **Shell Functions**: User-defined and system functions
+4. **Arrays**: Bash arrays and associative arrays
+5. **Shell Options**: Various bash settings and configurations
+
+**Comparison with other commands:**
+- `printenv`/`env`: Shows only environment variables
+- `set`: Shows everything (local variables + environment variables + functions)
+- `declare`: Similar to `set` but with type information
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on shell variables, expansions, and aliases.
