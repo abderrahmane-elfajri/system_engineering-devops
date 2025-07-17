@@ -145,6 +145,39 @@ daemon:*:1:1:System Services:/var/root:/usr/bin/false
 - `/etc/hosts` contains hostname to IP address mappings
 - The output will vary depending on the system configuration
 
+### 4-lastlines
+A script that displays the last 10 lines of `/etc/passwd`.
+
+**Usage:**
+```bash
+chmod +x ./4-lastlines
+./4-lastlines
+```
+
+**Expected output:**
+```
+_assetcache:*:235:235:Asset Cache Service:/var/empty:/usr/bin/false
+_coremediaiod:*:236:236:Core Media IO Daemon:/var/empty:/usr/bin/false
+_launchservicesd:*:239:239:_launchservicesd:/var/empty:/usr/bin/false
+_iconservices:*:240:240:IconServices:/var/empty:/usr/bin/false
+_distnote:*:241:241:DistNote:/var/empty:/usr/bin/false
+_nsurlsessiond:*:242:242:NSURLSession Daemon:/var/db/nsurlsessiond:/usr/bin/false
+_nsurlstoraged:*:243:243:NSURLStorage Daemon:/var/empty:/usr/bin/false
+_displaypolicyd:*:244:244:Display Policy Daemon:/var/empty:/usr/bin/false
+_astris:*:245:245:Astris Services:/var/db/astris:/usr/bin/false
+_krbfast:*:246:-2:Kerberos FAST Account:/var/empty:/usr/bin/false
+```
+
+**Command used:** `tail /etc/passwd`
+
+**Expected behavior:**
+- Displays the last 10 lines of `/etc/passwd` file
+- Uses the `tail` command which shows the end of a file
+- By default, `tail` displays the last 10 lines
+- The hint "Think of it as a cat, what is at the end of it?" refers to the tail
+- Shows the most recently added user accounts in the system
+- The output will vary depending on the system's user accounts
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on shell I/O redirections and filters.
