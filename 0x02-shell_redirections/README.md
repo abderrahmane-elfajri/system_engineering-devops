@@ -178,6 +178,39 @@ _krbfast:*:246:-2:Kerberos FAST Account:/var/empty:/usr/bin/false
 - Shows the most recently added user accounts in the system
 - The output will vary depending on the system's user accounts
 
+### 5-firstlines
+A script that displays the first 10 lines of `/etc/passwd`.
+
+**Usage:**
+```bash
+chmod +x ./5-firstlines
+./5-firstlines
+```
+
+**Expected output:**
+```
+##
+# User Database
+#
+# Note that this file is consulted directly only when the system is running
+# in single-user mode. At other times this information is provided by
+# Open Directory.
+#
+# See the opendirectoryd(8) man page for additional information about
+# Open Directory.
+##
+```
+
+**Command used:** `head /etc/passwd`
+
+**Expected behavior:**
+- Displays the first 10 lines of `/etc/passwd` file
+- Uses the `head` command which shows the beginning of a file
+- By default, `head` displays the first 10 lines
+- Shows the header comments and first few user accounts in the system
+- Complementary to the `tail` command used in the previous task
+- The output will vary depending on the system's configuration
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on shell I/O redirections and filters.
