@@ -100,6 +100,51 @@ _krbfast:*:246:-2:Kerberos FAST Account:/var/empty:/usr/bin/false
 - Each line represents a user account with fields separated by colons
 - The output will vary depending on the system's user accounts
 
+### 3-twofiles
+A script that displays the content of `/etc/passwd` and `/etc/hosts` files.
+
+**Usage:**
+```bash
+chmod +x ./3-twofiles
+./3-twofiles
+```
+
+**Expected output:**
+```
+##
+# User Database
+#
+# Note that this file is consulted directly only when the system is running
+# in single-user mode. At other times this information is provided by
+# Open Directory.
+#
+# See the opendirectoryd(8) man page for additional information about
+# Open Directory.
+##
+nobody:*:-2:-2:Unprivileged User:/var/empty:/usr/bin/false
+root:*:0:0:System Administrator:/var/root:/bin/sh
+daemon:*:1:1:System Services:/var/root:/usr/bin/false
+##
+# Host Database
+#
+# localhost is used to configure the loopback interface
+# when the system is booting. Do not change this entry.
+##
+127.0.0.1   localhost
+255.255.255.255 broadcasthost
+::1 localhost
+```
+
+**Command used:** `cat /etc/passwd /etc/hosts`
+
+**Expected behavior:**
+- Displays the content of both `/etc/passwd` and `/etc/hosts` files
+- Uses the `cat` command with multiple file arguments
+- The files are displayed one after another (concatenated)
+- `/etc/passwd` contains user account information
+- `/etc/hosts` contains hostname to IP address mappings
+- The output will vary depending on the system configuration
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on shell I/O redirections and filters.
