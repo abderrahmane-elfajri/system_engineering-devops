@@ -65,6 +65,40 @@ hello julien
 - Works for any user who executes the script
 - Demonstrates shell variable expansion
 
+### 2-path
+A script that adds `/action` to the PATH environment variable, ensuring that `/action` is the last directory the shell looks into when searching for programs.
+
+**Usage:**
+```bash
+source ./2-path
+```
+
+**Expected behavior:**
+- Appends `/action` to the end of the current PATH
+- Must be sourced (not executed) to affect the current shell environment
+- The `/action` directory becomes the last directory searched for executables
+
+**Example:**
+```bash
+julien@ubuntu:/tmp/0x03$ echo $PATH
+/home/julien/bin:/home/julien/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+julien@ubuntu:/tmp/0x03$ source ./2-path 
+
+julien@ubuntu:/tmp/0x03$ echo $PATH
+/home/julien/bin:/home/julien/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/action
+```
+
+**Command used:** `export PATH="$PATH:/action"`
+
+**Expected behavior:**
+- Uses `export` to make the PATH variable available to child processes
+- `$PATH` expands to the current PATH value
+- `:` is the delimiter between directories in PATH
+- `/action` is appended as the last directory
+- The shell will search `/action` last when looking for executables
+- Demonstrates PATH manipulation and environment variable modification
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on shell variables, expansions, and aliases.
