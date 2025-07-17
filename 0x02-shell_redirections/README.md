@@ -324,6 +324,63 @@ drwxrwxrwt 13 root   root   4096 Sep 20 18:18 ..
 - The output includes detailed file information (permissions, owner, size, date)
 - Note: The file `ls_cwd_content` will appear as size 0 in its own listing because the redirection happens before the file is written
 
+### 9-duplicate_last_line
+A script that duplicates the last line of the file `iacta`.
+
+**Usage:**
+```bash
+chmod +x ./9-duplicate_last_line
+./9-duplicate_last_line
+```
+
+**Expected output:**
+```bash
+# Before running the script
+julien@ubuntu:/tmp/h$ cat iacta 
+Alea iacta est
+
+Alea iacta est ("The die is cast") is a Latin phrase attributed by Suetonius
+(as iacta alea est) to Julius Caesar on January 10, 49 BC
+as he led his army across the Rubicon river in Northern Italy. With this step,
+he entered Italy at the head of his army in defiance of the Senate and began
+his long civil war against Pompey and the Optimates. The phrase has been
+adopted in Italian (Il dado è tratto), Romanian (Zarurile au fost aruncate),
+Spanish (La suerte está echada), French (Les dés sont jetés), Portuguese (A
+sorte está lançada), Dutch (De teerling is geworpen),
+German (Der Würfel ist gefallen), Hungarian (A kocka el van vetve) and many other languages to
+indicate that events have passed a point of no return.
+
+Read more: https://en.wikipedia.org/wiki/Alea_iacta_est
+
+# After running the script
+julien@ubuntu:/tmp/h$ cat iacta 
+Alea iacta est
+
+Alea iacta est ("The die is cast") is a Latin phrase attributed by Suetonius
+(as iacta alea est) to Julius Caesar on January 10, 49 BC
+as he led his army across the Rubicon river in Northern Italy. With this step,
+he entered Italy at the head of his army in defiance of the Senate and began
+his long civil war against Pompey and the Optimates. The phrase has been
+adopted in Italian (Il dado è tratto), Romanian (Zarurile au fost aruncate),
+Spanish (La suerte está echada), French (Les dés sont jetés), Portuguese (A
+sorte está lançada), Dutch (De teerling is geworpen),
+German (Der Würfel ist gefallen), Hungarian (A kocka el van vetve) and many other languages to
+indicate that events have passed a point of no return.
+
+Read more: https://en.wikipedia.org/wiki/Alea_iacta_est
+Read more: https://en.wikipedia.org/wiki/Alea_iacta_est
+```
+
+**Command used:** `tail -1 iacta >> iacta`
+
+**Expected behavior:**
+- Gets the last line of the file `iacta` using `tail -1`
+- Appends that line to the same file using `>>` (append redirection)
+- The `>>` operator appends to the file without overwriting existing content
+- Results in the last line being duplicated at the end of the file
+- The file `iacta` must exist in the working directory
+- Works regardless of the content of the file
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on shell I/O redirections and filters.
