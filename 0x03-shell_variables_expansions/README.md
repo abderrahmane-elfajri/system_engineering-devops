@@ -319,6 +319,56 @@ School
 - Local variable: `BEST="School"` (available only in current shell)
 - Environment variable: `export BEST="School"` (inherited by child processes)
 
+### 7-create_global_variable
+A script that creates a new global variable (environment variable) named `BEST` with the value `School`.
+
+**Usage:**
+```bash
+source ./7-create_global_variable
+```
+or
+```bash
+. ./7-create_global_variable
+```
+
+**Expected behavior:**
+- Creates a global variable `BEST` with the value `School`
+- The variable is exported to the environment, making it available to child processes
+- Must be sourced (not executed) to make the variable available in the current shell
+- The variable will be inherited by any child processes spawned from the current shell
+
+**Variable specifications:**
+- **Name**: BEST
+- **Value**: School
+- **Type**: Global variable (environment variable)
+
+**Command used:** `export BEST="School"`
+
+**Verification:**
+After sourcing the script, you can verify the variable exists and is exported:
+```bash
+$ . ./7-create_global_variable
+$ echo $BEST
+School
+$ printenv | grep BEST
+BEST=School
+```
+
+**Important notes:**
+- This creates a global variable (environment variable), not just a local variable
+- Global variables are inherited by child processes
+- The `export` command makes the variable available to the environment
+- The script must be sourced to affect the current shell environment
+- Exported variables appear in `printenv` output
+
+**Difference from local variables:**
+- Local variable: `BEST="School"` (available only in current shell)
+- Global variable: `export BEST="School"` (inherited by child processes)
+
+**Key concept:**
+- **Local variables**: Confined to the current shell session
+- **Global variables**: Passed on to child processes, making them accessible to programs and scripts
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on shell variables, expansions, and aliases.
