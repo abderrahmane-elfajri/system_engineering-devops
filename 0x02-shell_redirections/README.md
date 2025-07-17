@@ -32,6 +32,29 @@ Hello, World
 # Should show: Hello, World$
 ```
 
+### 1-confused_smiley
+A script that displays a confused smiley "(Ôo)'.
+
+**Usage:**
+```bash
+chmod +x ./1-confused_smiley
+./1-confused_smiley
+```
+
+**Expected output:**
+```
+"(Ôo)'
+```
+
+**Command used:** `echo "\"(Ôo)'"`
+
+**Expected behavior:**
+- Prints the confused smiley `"(Ôo)'` to standard output
+- Uses the `echo` command to output the text
+- The double quote at the beginning is escaped with `\"`
+- The single quote at the end is included as-is
+- The special character `Ô` is included in the output
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on shell I/O redirections and filters.
