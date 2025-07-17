@@ -233,6 +233,48 @@ julien@ubuntu:/tmp/h$ ls -l hello
 - After running, the file has permissions 753
 - Does not use commas in the command
 
+### 11-directories_permissions
+A script that adds execute permission to all subdirectories of the current directory for the owner, the group owner and all other users. Regular files should not be changed.
+
+**Usage:**
+```bash
+chmod +x ./11-directories_permissions
+./11-directories_permissions
+```
+
+**Expected output:**
+```bash
+# Before running the script
+julien@ubuntu:/tmp/h$ ls -l
+total 20
+-rwxrwxr-x 1 julien julien   24 Sep 20 14:53 11-directories_permissions
+drwx------ 2 julien julien 4096 Sep 20 14:49 dir0
+drwx------ 2 julien julien 4096 Sep 20 14:49 dir1
+drwx------ 2 julien julien 4096 Sep 20 14:49 dir2
+-rw-rw-r-- 1 julien julien   23 Sep 20 14:25 hello
+
+# After running the script
+julien@ubuntu:/tmp/h$ ./11-directories_permissions 
+julien@ubuntu:/tmp/h$ ls -l
+total 20
+-rwxrwxr-x 1 julien julien   24 Sep 20 14:53 11-directories_permissions
+drwx--x--x 2 julien julien 4096 Sep 20 14:49 dir0
+drwx--x--x 2 julien julien 4096 Sep 20 14:49 dir1
+drwx--x--x 2 julien julien 4096 Sep 20 14:49 dir2
+-rw-rw-r-- 1 julien julien   23 Sep 20 14:25 hello
+```
+
+**Command used:** `chmod a+X *`
+
+**Expected behavior:**
+- Adds execute permission to all subdirectories for owner, group, and others
+- Uses the `chmod` command with `a+X` (capital X)
+- `a` means "all" (owner, group, others)
+- `+X` adds execute permission only to directories and files that already have execute permission for someone
+- Regular files without execute permission remain unchanged
+- The `*` wildcard applies to all items in the current directory
+- Only directories get the execute permission added
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on shell permissions and user management fundamentals.
