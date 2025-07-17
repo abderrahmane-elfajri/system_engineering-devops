@@ -282,6 +282,48 @@ Best School$
 - `)` → `\)`
 - Space → `\ `
 
+### 8-cwd_state
+A script that writes into the file `ls_cwd_content` the result of the command `ls -la`. If the file already exists, it should be overwritten. If it doesn't exist, it should be created.
+
+**Usage:**
+```bash
+chmod +x ./8-cwd_state
+./8-cwd_state
+```
+
+**Expected output:**
+```bash
+# After running the script, ls_cwd_content file is created/overwritten
+julien@ubuntu:/tmp/h$ ls -la
+total 24
+drwxrwxr-x  2 julien julien 4096 Sep 20 18:18 .
+drwxrwxrwt 13 root   root   4096 Sep 20 18:18 ..
+-rwxrw-r--  1 julien julien   36 Sep 20 18:18 8-cwd_state
+-rw-rw-r--  1 betty  julien   23 Sep 20 14:25 hello
+-rw-rw-r--  1 julien julien  926 Sep 20 17:52 iacta
+-rw-rw-r--  1 julien julien  329 Sep 20 18:18 ls_cwd_content
+
+# The file contains the directory listing:
+julien@ubuntu:/tmp/h$ cat ls_cwd_content 
+total 20
+drwxrwxr-x  2 julien julien 4096 Sep 20 18:18 .
+drwxrwxrwt 13 root   root   4096 Sep 20 18:18 ..
+-rwxrw-r--  1 julien julien   36 Sep 20 18:18 8-cwd_state
+-rw-rw-r--  1 betty  julien   23 Sep 20 14:25 hello
+-rw-rw-r--  1 julien julien  926 Sep 20 17:52 iacta
+-rw-rw-r--  1 julien julien    0 Sep 20 18:18 ls_cwd_content
+```
+
+**Command used:** `ls -la > ls_cwd_content`
+
+**Expected behavior:**
+- Executes `ls -la` to list all files and directories in long format
+- Uses `>` redirection operator to write output to `ls_cwd_content`
+- The `>` operator overwrites the file if it exists, creates it if it doesn't
+- Saves the current state of the directory for later reference
+- The output includes detailed file information (permissions, owner, size, date)
+- Note: The file `ls_cwd_content` will appear as size 0 in its own listing because the redirection happens before the file is written
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on shell I/O redirections and filters.
