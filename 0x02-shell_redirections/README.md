@@ -240,6 +240,48 @@ Alea iacta est ("The die is cast") is a Latin phrase attributed by Suetonius
 2. `|` pipes that output to the next command
 3. `tail -1` gets the last line from the piped input (which is the 3rd line of the original file)
 
+### 7-file
+A script that creates a file named exactly `*\'"Best School"\'*$\?*****:)`, containing the text "Best School", and ending with a new line.
+
+**Usage:**
+```bash
+chmod +x ./7-file
+./7-file
+```
+
+**Expected output:**
+```bash
+# After running the script, a file with the complex name will be created
+julien@ubuntu:~/shell$ ls -l
+-rw-rw-r-- 1 julien julien 17 Jan 20 06:40 '\*\\'"Best School"\'\\*$\?\*\*\*\*\*:)'
+
+# The file contains:
+julien@ubuntu:~/shell$ cat -e \\*
+Best School$
+```
+
+**Command used:** `echo "Best School" > \*\\\'\"Best\ School\"\\\'\*\$\\\?\*\*\*\*\*\:\)`
+
+**Expected behavior:**
+- Creates a file with the exact name `*\'"Best School"\'*$\?*****:)`
+- The filename contains many special characters that need to be escaped
+- Uses `echo` to write "Best School" to the file
+- The `>` operator redirects output to create the file
+- Each special character in the filename is properly escaped with backslashes
+- The file contains "Best School" followed by a newline
+- Demonstrates advanced shell escaping techniques
+
+**Special characters escaped:**
+- `*` → `\*`
+- `\` → `\\`
+- `'` → `\'`
+- `"` → `\"`
+- `$` → `\$`
+- `?` → `\?`
+- `:` → `\:`
+- `)` → `\)`
+- Space → `\ `
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on shell I/O redirections and filters.
