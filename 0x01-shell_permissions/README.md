@@ -275,6 +275,47 @@ drwx--x--x 2 julien julien 4096 Sep 20 14:49 dir2
 - The `*` wildcard applies to all items in the current directory
 - Only directories get the execute permission added
 
+### 12-directory_permissions
+A script that creates a directory called my_dir with permissions 751 in the working directory.
+
+**Usage:**
+```bash
+chmod +x ./12-directory_permissions
+./12-directory_permissions
+```
+
+**Expected output:**
+```bash
+# Before running the script
+julien@ubuntu:/tmp/h$ ls -l
+total 20
+-rwxrwxr-x 1 julien julien   39 Sep 20 14:59 12-directory_permissions
+drwx--x--x 2 julien julien 4096 Sep 20 14:49 dir0
+drwx--x--x 2 julien julien 4096 Sep 20 14:49 dir1
+drwx--x--x 2 julien julien 4096 Sep 20 14:49 dir2
+-rw-rw-r-- 1 julien julien   23 Sep 20 14:25 hello
+
+# After running the script
+julien@ubuntu:/tmp/h$ ./12-directory_permissions
+julien@ubuntu:/tmp/h$ ls -l
+total 24
+-rwxrwxr-x 1 julien julien   39 Sep 20 14:59 12-directory_permissions
+drwx--x--x 2 julien julien 4096 Sep 20 14:49 dir0
+drwx--x--x 2 julien julien 4096 Sep 20 14:49 dir1
+drwx--x--x 2 julien julien 4096 Sep 20 14:49 dir2
+drwxr-x--x 2 julien julien 4096 Sep 20 14:59 my_dir
+-rw-rw-r-- 1 julien julien   23 Sep 20 14:25 hello
+```
+
+**Command used:** `mkdir -m 751 my_dir`
+
+**Expected behavior:**
+- Creates a directory called "my_dir" with permissions 751
+- Uses the `mkdir` command with `-m` option to set permissions during creation
+- The permissions are: owner (rwx=7), group (r-x=5), others (--x=1)
+- The resulting directory has permissions `drwxr-x--x`
+- More efficient than creating the directory first and then changing permissions
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on shell permissions and user management fundamentals.
