@@ -276,7 +276,7 @@ drwx--x--x 2 julien julien 4096 Sep 20 14:49 dir2
 - Only directories get the execute permission added
 
 ### 12-directory_permissions
-A script that creates a directory called my_dir with permissions 751 in the working directory.
+A script that creates a directory called `my_dir` with permissions 751 in the working directory.
 
 **Usage:**
 ```bash
@@ -310,11 +310,52 @@ drwxr-x--x 2 julien julien 4096 Sep 20 14:59 my_dir
 **Command used:** `mkdir -m 751 my_dir`
 
 **Expected behavior:**
-- Creates a directory called "my_dir" with permissions 751
-- Uses the `mkdir` command with `-m` option to set permissions during creation
-- The permissions are: owner (rwx=7), group (r-x=5), others (--x=1)
-- The resulting directory has permissions `drwxr-x--x`
-- More efficient than creating the directory first and then changing permissions
+- Creates a directory called `my_dir` with permissions 751
+- Uses the `mkdir` command with the `-m` option to set permissions during creation
+- Permissions 751 means: owner (rwx=7), group (r-x=5), others (--x=1)
+- The directory is created in the current working directory
+
+### 13-change_group
+A script that changes the group owner to `school` for the file `hello`.
+
+**Usage:**
+```bash
+chmod +x ./13-change_group
+sudo ./13-change_group
+```
+
+**Expected output:**
+```bash
+# Before running the script
+julien@ubuntu:/tmp/h$ ls -l
+total 24
+-rwxrwxr-x 1 julien julien      34 Sep 20 15:03 13-change_group
+drwx--x--x 2 julien julien    4096 Sep 20 14:49 dir0
+drwx--x--x 2 julien julien    4096 Sep 20 14:49 dir1
+drwx--x--x 2 julien julien    4096 Sep 20 14:49 dir2
+drwxr-x--x 2 julien julien    4096 Sep 20 14:59 my_dir
+-rw-rw-r-- 1 julien school   23 Sep 20 14:25 hello
+
+# After running the script
+julien@ubuntu:/tmp/h$ sudo ./13-change_group
+julien@ubuntu:/tmp/h$ ls -l
+total 24
+-rwxrwxr-x 1 julien julien      34 Sep 20 15:03 13-change_group
+drwx--x--x 2 julien julien    4096 Sep 20 14:49 dir0
+drwx--x--x 2 julien julien    4096 Sep 20 14:49 dir1
+drwx--x--x 2 julien julien    4096 Sep 20 14:49 dir2
+drwxr-x--x 2 julien julien    4096 Sep 20 14:59 my_dir
+-rw-rw-r-- 1 julien school   23 Sep 20 14:25 hello
+```
+
+**Command used:** `chgrp school hello`
+
+**Expected behavior:**
+- Changes the group owner of the file `hello` to `school`
+- Uses the `chgrp` command (change group)
+- The file `hello` must exist in the current directory
+- May require sudo privileges depending on current user permissions
+- Only the group ownership changes, file permissions remain the same
 
 ## About
 
