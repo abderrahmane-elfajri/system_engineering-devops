@@ -99,6 +99,55 @@ julien@ubuntu:/tmp/0x03$ echo $PATH
 - The shell will search `/action` last when looking for executables
 - Demonstrates PATH manipulation and environment variable modification
 
+### 3-paths
+A script that counts the number of directories in the PATH environment variable.
+
+**Usage:**
+```bash
+chmod +x ./3-paths
+./3-paths
+```
+or
+```bash
+. ./3-paths
+```
+
+**Expected output:**
+```
+11
+```
+(The actual number depends on your PATH configuration)
+
+**Example:**
+```bash
+julien@ubuntu:/tmp/0x03$ echo $PATH
+/home/julien/bin:/home/julien/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+julien@ubuntu:/tmp/0x03$ . ./3-paths 
+11
+
+julien@ubuntu:/tmp/0x03$ PATH=/home/julien/bin:/home/julien/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:::::/hello
+
+julien@ubuntu:/tmp/0x03$ . ./3-paths 
+12
+```
+
+**Command used:** `echo $PATH | tr ':' '\n' | wc -l`
+
+**Expected behavior:**
+- `echo $PATH` outputs the PATH environment variable
+- `tr ':' '\n'` replaces each colon with a newline, putting each directory on its own line
+- `wc -l` counts the number of lines, which equals the number of directories
+- Handles empty directories (consecutive colons) correctly by counting them as separate entries
+- Works with any PATH configuration
+- Demonstrates string manipulation and pipe operations
+
+**How it works:**
+1. PATH directories are separated by colons `:`
+2. `tr` (translate) replaces colons with newlines
+3. `wc -l` counts the resulting lines
+4. Each line represents one directory in the PATH
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on shell variables, expansions, and aliases.
