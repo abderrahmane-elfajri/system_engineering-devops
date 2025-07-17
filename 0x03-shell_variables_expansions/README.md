@@ -413,6 +413,53 @@ julien@production-503e7013:~$
 - Variables inside `$(())` don't need the `$` prefix
 - Supports basic arithmetic operations: `+`, `-`, `*`, `/`, `%`
 
+### 9-divide_and_rule
+A script that prints the result of `POWER` divided by `DIVIDE`.
+
+**Usage:**
+```bash
+export POWER=42784
+export DIVIDE=32
+chmod +x ./9-divide_and_rule
+./9-divide_and_rule
+```
+
+**Expected output:**
+```
+1337
+```
+(Result of POWER / DIVIDE)
+
+**Example:**
+```bash
+julien@production-503e7013:~$ export POWER=42784
+julien@production-503e7013:~$ export DIVIDE=32
+julien@production-503e7013:~$ ./9-divide_and_rule | cat -e
+1337$
+julien@production-503e7013:~$
+```
+
+**Command used:** `echo $((POWER / DIVIDE))`
+
+**Expected behavior:**
+- Reads values from environment variables `POWER` and `DIVIDE`
+- Performs integer division using arithmetic expansion
+- Prints the result followed by a newline
+- Uses `$((expression))` for arithmetic operations in bash
+- Assumes both variables contain numeric values suitable for division
+
+**Important notes:**
+- Both `POWER` and `DIVIDE` variables must be set in the environment before execution
+- Uses arithmetic expansion `$((POWER / DIVIDE))` for the division
+- Performs integer division (truncates decimal part)
+- The result is automatically followed by a newline from `echo`
+- Demonstrates division operations with environment variables
+
+**Arithmetic division:**
+- `/` operator performs integer division in bash arithmetic expansion
+- Result is truncated (not rounded) if there's a remainder
+- For example: `42784 / 32 = 1337` (exact division)
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on shell variables, expansions, and aliases.
