@@ -369,6 +369,50 @@ BEST=School
 - **Local variables**: Confined to the current shell session
 - **Global variables**: Passed on to child processes, making them accessible to programs and scripts
 
+### 8-true_knowledge
+A script that prints the result of adding 128 to the value stored in the environment variable `TRUEKNOWLEDGE`.
+
+**Usage:**
+```bash
+export TRUEKNOWLEDGE=1209
+chmod +x ./8-true_knowledge
+./8-true_knowledge
+```
+
+**Expected output:**
+```
+1337
+```
+(Result of TRUEKNOWLEDGE + 128)
+
+**Example:**
+```bash
+julien@production-503e7013:~$ export TRUEKNOWLEDGE=1209
+julien@production-503e7013:~$ ./8-true_knowledge | cat -e
+1337$
+julien@production-503e7013:~$
+```
+
+**Command used:** `echo $((TRUEKNOWLEDGE + 128))`
+
+**Expected behavior:**
+- Reads the value from the environment variable `TRUEKNOWLEDGE`
+- Adds 128 to that value using arithmetic expansion
+- Prints the result followed by a newline
+- Uses `$((expression))` for arithmetic operations in bash
+- Assumes `TRUEKNOWLEDGE` contains a numeric value
+
+**Important notes:**
+- The `TRUEKNOWLEDGE` variable must be set in the environment before execution
+- Uses arithmetic expansion `$((TRUEKNOWLEDGE + 128))` for the calculation
+- The result is automatically followed by a newline from `echo`
+- Demonstrates accessing environment variables and performing arithmetic operations
+
+**Arithmetic expansion syntax:**
+- `$((variable + number))` performs addition
+- Variables inside `$(())` don't need the `$` prefix
+- Supports basic arithmetic operations: `+`, `-`, `*`, `/`, `%`
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on shell variables, expansions, and aliases.
