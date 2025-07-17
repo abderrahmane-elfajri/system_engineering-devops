@@ -161,9 +161,67 @@ done
 - **For loop**: Best for known number of iterations with simple counter
 - **While loop**: Best when you want to continue while something is true
 - **Until loop**: Best when you want to continue until something becomes true
-- **For loop**: More compact, ideal when you know exact number of iterations
-- **While loop**: More flexible, continues as long as condition is true
-- **Both**: Achieve the same result but with different syntax and control flow
+
+### 4-if_9_say_hi
+A Bash script that displays "Best School" 10 times, but on the 9th iteration it also displays "Hi" on a new line.
+
+**Usage:**
+```bash
+chmod +x ./4-if_9_say_hi
+./4-if_9_say_hi
+```
+
+**Expected output:**
+```
+Best School
+Best School
+Best School
+Best School
+Best School
+Best School
+Best School
+Best School
+Best School
+Hi
+Best School
+```
+
+**Requirements:**
+- Uses a while loop (for and until loops are forbidden)
+- Uses an if statement to check for the 9th iteration
+- First line: `#!/usr/bin/env bash`
+- Second line: Comment explaining the script's purpose
+- Displays "Best School" exactly 10 times
+- On the 9th iteration, displays "Hi" after "Best School"
+
+**Script structure:**
+```bash
+#!/usr/bin/env bash
+# This script displays "Best School" 10 times, but on the 9th iteration it also displays "Hi"
+i=1
+while [ $i -le 10 ]
+do
+    echo "Best School"
+    if [ $i -eq 9 ]
+    then
+        echo "Hi"
+    fi
+    ((i++))
+done
+```
+
+**Key concepts:**
+- **Combining loops and conditionals**: Using if statement inside while loop
+- **Conditional logic**: `[ $i -eq 9 ]` checks if counter equals 9
+- **If statement syntax**: `if [ condition ]; then ... fi`
+- **Sequential execution**: "Best School" prints first, then condition is checked
+- **Indentation**: Proper nesting with 4 spaces for loop body, 8 spaces for if body
+
+**Comparison with previous scripts:**
+- **1-for_best_school**: Simple for loop, no conditions
+- **2-while_best_school**: Simple while loop, no conditions  
+- **3-until_best_school**: Simple until loop, no conditions
+- **4-if_9_say_hi**: While loop + conditional logic for dynamic behavior
 
 ## About
 
