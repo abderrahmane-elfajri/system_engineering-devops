@@ -49,6 +49,59 @@ done
 - **Echo command**: Outputs text to standard output
 - **Loop counter**: Variable `i` tracks iterations from 1 to 10
 
+### 2-while_best_school
+A Bash script that displays "Best School" exactly 10 times using a while loop.
+
+**Usage:**
+```bash
+chmod +x ./2-while_best_school
+./2-while_best_school
+```
+
+**Expected output:**
+```
+Best School
+Best School
+Best School
+Best School
+Best School
+Best School
+Best School
+Best School
+Best School
+Best School
+```
+
+**Requirements:**
+- Uses a while loop (for and until loops are forbidden)
+- First line: `#!/usr/bin/env bash`
+- Second line: Comment explaining the script's purpose
+- Displays "Best School" exactly 10 times
+
+**Script structure:**
+```bash
+#!/usr/bin/env bash
+# This script is displaying "Best School" 10 times
+i=1
+while [ $i -le 10 ]
+do
+    echo "Best School"
+    ((i++))
+done
+```
+
+**Key concepts:**
+- **While loop syntax**: `while [ condition ]`
+- **Test condition**: `[ $i -le 10 ]` checks if i is less than or equal to 10
+- **Loop initialization**: Variable `i` starts at 1
+- **Loop increment**: `((i++))` increases the counter by 1 each iteration
+- **Loop body**: Commands executed while condition is true
+
+**Comparison with for loop:**
+- **For loop**: More compact, ideal when you know exact number of iterations
+- **While loop**: More flexible, continues as long as condition is true
+- **Both**: Achieve the same result but with different syntax and control flow
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on loops, conditions, and parsing in Bash scripting.
