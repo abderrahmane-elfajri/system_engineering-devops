@@ -381,6 +381,66 @@ Read more: https://en.wikipedia.org/wiki/Alea_iacta_est
 - The file `iacta` must exist in the working directory
 - Works regardless of the content of the file
 
+### 10-no_more_js
+A script that deletes all the regular files (not the directories) with a `.js` extension that are present in the current directory and all its sub-folders.
+
+**Usage:**
+```bash
+chmod +x ./10-no_more_js
+./10-no_more_js
+```
+
+**Expected output:**
+```bash
+# Before running the script
+julien@ubuntu:/tmp/h$ ls -lR
+.:
+total 24
+-rwxrw-r-- 1 julien julien   49 Sep 20 18:29 10-no_more_js
+drwxrwxr-x 2 julien julien 4096 Sep 20 18:23 dir1
+drwxrwxr-x 2 julien julien 4096 Sep 20 18:24 dir.js
+-rw-rw-r-- 1 betty  julien   23 Sep 20 14:25 hello
+-rw-rw-r-- 1 julien julien  982 Sep 20 18:21 iacta
+-rw-rw-r-- 1 julien julien  329 Sep 20 18:18 ls_cwd_content
+-rw-rw-r-- 1 julien julien    0 Sep 20 18:23 main.js
+
+./dir1:
+total 0
+-rw-rw-r-- 1 julien julien 0 Sep 20 18:23 code.js
+
+./dir.js:
+total 0
+
+# After running the script
+julien@ubuntu:/tmp/h$ ls -lR
+.:
+total 24
+-rwxrw-r-- 1 julien julien   49 Sep 20 18:29 10-no_more_js
+drwxrwxr-x 2 julien julien 4096 Sep 20 18:29 dir1
+drwxrwxr-x 2 julien julien 4096 Sep 20 18:24 dir.js
+-rw-rw-r-- 1 betty  julien   23 Sep 20 14:25 hello
+-rw-rw-r-- 1 julien julien  982 Sep 20 18:21 iacta
+-rw-rw-r-- 1 julien julien  329 Sep 20 18:18 ls_cwd_content
+
+./dir1:
+total 0
+
+./dir.js:
+total 0
+```
+
+**Command used:** `find . -type f -name "*.js" -delete`
+
+**Expected behavior:**
+- Uses `find` command to search recursively from current directory (`.`)
+- `-type f` ensures only regular files are targeted (not directories)
+- `-name "*.js"` matches files with `.js` extension
+- `-delete` removes the matched files
+- Deletes `main.js` from current directory and `code.js` from `dir1` subdirectory
+- Leaves directories untouched (like `dir.js` which is a directory, not a file)
+- Works recursively through all subdirectories
+- Safe operation that only targets `.js` files
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on shell I/O redirections and filters.
