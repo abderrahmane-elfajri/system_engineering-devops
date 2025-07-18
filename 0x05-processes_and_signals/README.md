@@ -506,12 +506,6 @@ pkill -f "4-to_infinity_and_beyond"
 - **Process response**: Process can catch and handle SIGTERM
 - **Termination**: Process stops execution and exits
 
-**Pattern matching details:**
-- **-f flag**: Searches entire command line including arguments
-- **Exact match**: Finds processes containing the exact string
-- **Case sensitive**: Pattern matching is case-sensitive
-- **Multiple matches**: Will kill all matching processes
-
 **Practical applications:**
 - **Service management**: Stop services by name pattern
 - **Script automation**: Terminate processes in automated scripts
@@ -740,6 +734,141 @@ pkill -f "7-highlander"
 - **Termination signal**: pkill sends termination signal
 - **Process cleanup**: System ensures process terminates
 - **Completely stopped**: Process no longer exists
+
+### 8-beheaded_process
+A Bash script that forcibly terminates the 7-highlander process using the SIGKILL signal, demonstrating the ultimate power of signal 9.
+
+**Usage:**
+```bash
+chmod +x ./8-beheaded_process
+./8-beheaded_process
+```
+
+**Testing scenario:**
+Terminal #0 (Start the highlander):
+```bash
+./7-highlander
+To infinity and beyond
+To infinity and beyond
+To infinity and beyond
+To infinity and beyond
+Killed
+```
+
+Terminal #1 (Force kill the highlander):
+```bash
+./8-beheaded_process
+```
+
+**Requirements:**
+- Must use SIGKILL (signal 9) to terminate the process
+- Must find the PID of the 7-highlander process
+- Forcibly terminates the process regardless of signal handling
+- First line: `#!/usr/bin/env bash`
+- Second line: Comment explaining the script's purpose
+
+**Script structure:**
+```bash
+#!/usr/bin/env bash
+# This script kills the 7-highlander process using SIGKILL signal
+kill -9 "$(pgrep -f "7-highlander")"
+```
+
+**Key concepts:**
+- **SIGKILL signal**: Signal 9 - the most forceful termination signal
+- **Unblockable signal**: Cannot be caught, ignored, or handled by processes
+- **Immediate termination**: Process stops instantly without cleanup
+- **Ultimate authority**: Operating system's final word on process control
+- **Force kill**: Last resort when other termination methods fail
+
+**Command breakdown:**
+- **`kill -9`**: Send SIGKILL signal (signal number 9)
+- **`pgrep -f "7-highlander"`**: Find PID of process containing "7-highlander"
+- **`$()`**: Command substitution to get PID from pgrep
+- **`"$(...)"`**: Quotes ensure proper PID handling
+- **Result**: Immediate and unconditional process termination
+
+**SIGKILL characteristics:**
+- **Signal number**: 9 (SIGKILL)
+- **Cannot be trapped**: No way for process to catch or handle it
+- **Cannot be ignored**: Process cannot ignore this signal
+- **Cannot be blocked**: No mechanism to block SIGKILL
+- **Immediate effect**: Process terminates instantly
+- **No cleanup**: Process cannot perform cleanup operations
+
+**Comparison with previous signals:**
+- **SIGTERM (15)**: Graceful termination request (can be trapped)
+- **SIGINT (2)**: Interrupt signal (can be trapped)
+- **SIGKILL (9)**: Force kill (cannot be trapped or ignored)
+- **SIGSTOP (19)**: Suspend process (cannot be trapped)
+
+**Why SIGKILL works against 7-highlander:**
+- **Trap bypass**: Signal 9 bypasses all signal handling mechanisms
+- **System level**: Handled directly by the operating system kernel
+- **No process involvement**: Process has no opportunity to respond
+- **Immediate termination**: Process state changes from running to terminated
+- **Resource cleanup**: Kernel handles resource cleanup automatically
+
+**Signal handling hierarchy:**
+1. **SIGTERM**: Polite request to terminate (can be ignored)
+2. **SIGINT**: Interrupt signal (can be caught)
+3. **SIGKILL**: Force termination (cannot be avoided)
+4. **System shutdown**: Ultimate process termination
+
+**Practical applications:**
+- **Unresponsive processes**: When normal termination methods fail
+- **System maintenance**: Emergency process termination
+- **Resource recovery**: Free up system resources from stuck processes
+- **Security**: Immediate termination of potentially malicious processes
+- **System administration**: Last resort for process management
+
+**Safety considerations:**
+- **Data loss**: Process cannot save data or cleanup
+- **Resource leaks**: May leave temporary files or connections open
+- **Use sparingly**: Only when graceful termination fails
+- **System impact**: Abrupt termination can affect system stability
+- **Last resort**: Try SIGTERM first, then SIGKILL if necessary
+
+**Process termination progression:**
+1. **SIGTERM**: Ask nicely (kill <PID>)
+2. **Wait**: Give process time to cleanup
+3. **SIGKILL**: Force termination (kill -9 <PID>)
+4. **Verify**: Check that process is actually terminated
+
+**Technical details:**
+- **Kernel handling**: SIGKILL is processed by the kernel, not the process
+- **Process state**: Changes immediately from running to zombie
+- **Resource cleanup**: Kernel automatically cleans up process resources
+- **Parent notification**: Parent process receives SIGCHLD signal
+- **Exit status**: Process exits with specific status indicating forced termination
+
+**Educational value:**
+- **Signal hierarchy**: Understanding different levels of process control
+- **System authority**: Operating system's ultimate control over processes
+- **Process management**: When and how to use different termination methods
+- **Administrative tools**: Essential skill for system administration
+- **Emergency procedures**: Handling unresponsive or stuck processes
+
+**Best practices:**
+- **Try SIGTERM first**: Always attempt graceful termination
+- **Wait period**: Give process time to respond to SIGTERM
+- **Use SIGKILL sparingly**: Only when other methods fail
+- **Verify termination**: Check that process is actually stopped
+- **Document usage**: Log when and why SIGKILL was used
+
+**Testing sequence:**
+1. **Start highlander**: Run ./7-highlander in terminal
+2. **Test SIGTERM**: Try kill <PID> (should show "I am invincible!!!")
+3. **Verify trap**: Process should continue running despite SIGTERM
+4. **Run beheaded**: Execute ./8-beheaded_process
+5. **Verify termination**: Highlander should be completely killed
+6. **Check output**: Terminal should show "Killed"
+
+**Alternative SIGKILL methods:**
+- **kill -9 <PID>**: Direct kill with signal 9
+- **kill -KILL <PID>**: Using signal name instead of number
+- **pkill -9 <pattern>**: Pattern-based force kill
+- **killall -9 <name>**: Kill all processes by name with force
 
 ## About
 
