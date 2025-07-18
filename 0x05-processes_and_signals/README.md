@@ -257,6 +257,90 @@ pgrep -l bash
 - **Task 3**: `pgrep -l bash` - Direct, concise process lookup
 - **Evolution**: From general-purpose to specialized tools
 
+### 4-to_infinity_and_beyond
+A Bash script that displays "To infinity and beyond" indefinitely in an infinite loop with 2-second pauses.
+
+**Usage:**
+```bash
+chmod +x ./4-to_infinity_and_beyond
+./4-to_infinity_and_beyond
+```
+
+**Expected output:**
+```
+To infinity and beyond
+To infinity and beyond
+To infinity and beyond
+To infinity and beyond
+To infinity and beyond
+^C
+```
+(Continues until manually stopped with Ctrl+C)
+
+**Requirements:**
+- Runs in an infinite loop
+- Displays "To infinity and beyond" continuously
+- Pauses for 2 seconds between each display
+- Must be stopped manually with Ctrl+C
+- First line: `#!/usr/bin/env bash`
+- Second line: Comment explaining the script's purpose
+
+**Script structure:**
+```bash
+#!/usr/bin/env bash
+# This script displays "To infinity and beyond" indefinitely
+while true
+do
+    echo "To infinity and beyond"
+    sleep 2
+done
+```
+
+**Key concepts:**
+- **Infinite loop**: `while true` creates a loop that never terminates naturally
+- **Sleep command**: `sleep 2` pauses execution for 2 seconds
+- **Signal handling**: Ctrl+C sends SIGINT to terminate the process
+- **Continuous execution**: Loop runs indefinitely until interrupted
+- **Process control**: Manual intervention required to stop
+
+**Command breakdown:**
+- **`while true`**: Infinite loop condition (always evaluates to true)
+- **`do...done`**: Loop body containing commands to execute
+- **`echo`**: Displays the message to standard output
+- **`sleep 2`**: Pauses execution for 2 seconds
+- **`Ctrl+C`**: Sends SIGINT signal to terminate the process
+
+**Infinite loop patterns:**
+- **`while true`**: Most common and readable
+- **`while :`**: Alternative using colon (: is always true)
+- **`for (( ; ; ))`**: C-style infinite loop
+- **`until false`**: Loops until false (which never happens)
+
+**Practical applications:**
+- **Service monitoring**: Continuously check system status
+- **Log monitoring**: Watch log files for changes
+- **Server processes**: Keep services running indefinitely
+- **Periodic tasks**: Execute commands at regular intervals
+- **System daemons**: Background processes that run continuously
+
+**Safety considerations:**
+- **CPU usage**: Sleep prevents excessive CPU consumption
+- **Resource management**: Infinite loops can consume system resources
+- **Signal handling**: Always ensure processes can be terminated
+- **Error handling**: Consider what happens if commands fail
+
+**Stopping the script:**
+- **Ctrl+C**: Sends SIGINT (interrupt signal)
+- **Ctrl+Z**: Sends SIGTSTP (suspend signal)
+- **kill command**: Can terminate by PID
+- **killall command**: Can terminate by process name
+
+**Signal concepts:**
+- **SIGINT**: Interrupt signal (Ctrl+C)
+- **SIGTERM**: Termination signal (graceful shutdown)
+- **SIGKILL**: Force kill signal (cannot be caught)
+- **Process termination**: How to stop infinite loops safely
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on processes and signals in Linux systems.
