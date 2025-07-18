@@ -525,6 +525,222 @@ pkill -f "4-to_infinity_and_beyond"
 - **Process verification**: Check what processes match before killing
 - **Testing**: Test patterns carefully to avoid unintended termination
 
+### 7-highlander
+A Bash script that displays "To infinity and beyond" indefinitely while demonstrating signal handling by catching and responding to SIGTERM signals.
+
+**Usage:**
+```bash
+chmod +x ./7-highlander
+./7-highlander
+```
+
+**Testing scenario:**
+Terminal #0 (Start the highlander):
+```bash
+./7-highlander
+To infinity and beyond
+To infinity and beyond
+To infinity and beyond
+I am invincible!!!
+To infinity and beyond
+To infinity and beyond
+To infinity and beyond
+I am invincible!!!
+To infinity and beyond
+```
+
+Terminal #1 (Try to stop with kill):
+```bash
+kill <PID_of_7-highlander>
+```
+
+**Requirements:**
+- Displays "To infinity and beyond" indefinitely
+- Catches SIGTERM signal and displays "I am invincible!!!"
+- Continues running after receiving SIGTERM
+- Uses trap to handle signal gracefully
+- First line: `#!/usr/bin/env bash`
+- Second line: Comment explaining the script's purpose
+
+**Script structure:**
+```bash
+#!/usr/bin/env bash
+# This script displays "To infinity and beyond" indefinitely and handles SIGTERM signal
+trap 'echo "I am invincible!!!"' SIGTERM
+
+while true
+do
+    echo "To infinity and beyond"
+    sleep 2
+done
+```
+
+**Key concepts:**
+- **Signal handling**: Using trap to catch and respond to signals
+- **SIGTERM signal**: Standard termination signal (signal 15)
+- **Signal trapping**: Intercepting signals before they terminate the process
+- **Resilient processes**: Processes that continue running despite termination attempts
+- **Custom signal response**: Defining what happens when signal is received
+
+**Command breakdown:**
+- **`trap 'command' SIGNAL`**: Sets up signal handler for specified signal
+- **`'echo "I am invincible!!!"'`**: Command executed when SIGTERM received
+- **`SIGTERM`**: Signal to trap (termination signal)
+- **`while true`**: Infinite loop continues running
+- **Signal flow**: SIGTERM → trap → message → continue loop
+
+**Signal trapping details:**
+- **trap command**: Built-in bash command for signal handling
+- **Signal names**: Can use SIGTERM, TERM, or number 15
+- **Handler execution**: Trap command executes when signal received
+- **Process continuation**: After handler runs, process continues normally
+- **Signal masking**: Trap effectively "masks" the signal's default behavior
+
+**What happens when SIGTERM is sent:**
+1. **Signal reception**: Process receives SIGTERM signal
+2. **Trap activation**: Bash executes the trap command
+3. **Message display**: "I am invincible!!!" is printed
+4. **Loop continuation**: while loop continues running
+5. **Default behavior**: Signal doesn't terminate the process
+
+**Types of signals:**
+- **SIGTERM (15)**: Graceful termination request (can be trapped)
+- **SIGKILL (9)**: Force kill (cannot be trapped or ignored)
+- **SIGINT (2)**: Interrupt signal from Ctrl+C (can be trapped)
+- **SIGSTOP (19)**: Suspend process (cannot be trapped)
+- **SIGHUP (1)**: Hangup signal (can be trapped)
+
+**Practical applications:**
+- **Service daemons**: Handle shutdown requests gracefully
+- **Cleanup operations**: Perform cleanup before termination
+- **Resource management**: Close files, connections before exit
+- **Logging**: Log termination attempts for security monitoring
+- **State preservation**: Save current state before shutdown
+
+**Signal handling best practices:**
+- **Graceful cleanup**: Use trap to clean up resources
+- **Multiple signals**: Handle different signals appropriately
+- **Restoration**: Restore terminal state if modified
+- **Error handling**: Consider what happens if cleanup fails
+- **Documentation**: Document signal handling behavior
+
+**Testing the script:**
+- **Start script**: Run ./7-highlander in one terminal
+- **Find PID**: Use ps, pgrep, or another method to find process ID
+- **Send SIGTERM**: Use kill <PID> to send termination signal
+- **Observe behavior**: Script shows message but continues running
+- **Force kill**: Use kill -9 <PID> to force termination
+
+**Limitations:**
+- **SIGKILL immunity**: Cannot trap SIGKILL (kill -9)
+- **SIGSTOP immunity**: Cannot trap SIGSTOP
+- **System limits**: System can still force termination
+- **Resource limits**: Process can be killed for resource violations
+
+### 67-stop_me_if_you_can
+A Bash script that stops the 7-highlander process using pkill, demonstrating that even signal-handling processes can be terminated with the right approach.
+
+**Usage:**
+```bash
+chmod +x ./67-stop_me_if_you_can
+./67-stop_me_if_you_can
+```
+
+**Testing scenario:**
+Terminal #0 (Start the highlander):
+```bash
+./7-highlander
+To infinity and beyond
+To infinity and beyond
+To infinity and beyond
+I am invincible!!!
+To infinity and beyond
+To infinity and beyond
+Killed
+```
+
+Terminal #1 (Stop the highlander):
+```bash
+./67-stop_me_if_you_can
+```
+
+**Requirements:**
+- Must stop the 7-highlander process completely
+- Cannot use kill command
+- Cannot use killall command
+- Must terminate the signal-handling process
+- First line: `#!/usr/bin/env bash`
+- Second line: Comment explaining the script's purpose
+
+**Script structure:**
+```bash
+#!/usr/bin/env bash
+# This script stops the 7-highlander process
+pkill -f "7-highlander"
+```
+
+**Key concepts:**
+- **Process termination**: Even signal-handling processes can be stopped
+- **pkill effectiveness**: pkill can terminate trapped processes
+- **Signal override**: Some termination methods bypass signal handlers
+- **Process management**: Administrative control over running processes
+- **Pattern matching**: Using filename patterns to identify processes
+
+**Why this works:**
+- **SIGTERM by default**: pkill sends SIGTERM first (which gets trapped)
+- **Process cleanup**: pkill may use additional mechanisms
+- **System enforcement**: Operating system can override process behavior
+- **Multiple attempts**: pkill may retry with different signals
+- **Administrative power**: System tools have privileges to terminate processes
+
+**Command breakdown:**
+- **`pkill`**: Process kill utility for pattern-based termination
+- **`-f`**: Search full command line including script name
+- **`"7-highlander"`**: Pattern to match the highlander process
+- **Result**: Terminates the process despite signal handling
+
+**Signal handling vs. process termination:**
+- **Signal trapping**: Process can catch and handle some signals
+- **System override**: Operating system can force termination
+- **Administrative tools**: System utilities have enhanced privileges
+- **Process limits**: Even trapped processes have termination mechanisms
+- **Resource management**: System protects itself from runaway processes
+
+**Practical applications:**
+- **System administration**: Stop misbehaving services
+- **Process cleanup**: Terminate stuck or runaway processes
+- **Security**: Stop potentially malicious processes
+- **Maintenance**: Clean up processes during system maintenance
+- **Emergency control**: Force termination when normal methods fail
+
+**Alternative termination methods:**
+- **kill -9**: Force kill with SIGKILL (cannot be trapped)
+- **System shutdown**: System-wide process termination
+- **Resource limits**: Process killed for exceeding limits
+- **Parent termination**: Child processes terminated when parent dies
+- **Session termination**: All processes in session terminated
+
+**Educational value:**
+- **Signal limitations**: Not all signals can be trapped
+- **System authority**: Operating system has ultimate control
+- **Process management**: Understanding how processes can be controlled
+- **Administrative tools**: Learning system management utilities
+- **Security implications**: How to handle unresponsive processes
+
+**Testing sequence:**
+1. **Start highlander**: Run ./7-highlander
+2. **Test signal handling**: Try kill <PID> (should show "I am invincible!!!")
+3. **Verify continuation**: Process should continue running
+4. **Run terminator**: Execute ./67-stop_me_if_you_can
+5. **Verify termination**: Highlander process should be completely stopped
+
+**Process state changes:**
+- **Running**: Normal execution with signal handling
+- **Signal received**: Trap executes, process continues
+- **Termination signal**: pkill sends termination signal
+- **Process cleanup**: System ensures process terminates
+- **Completely stopped**: Process no longer exists
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on processes and signals in Linux systems.
