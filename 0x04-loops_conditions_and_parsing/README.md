@@ -440,6 +440,90 @@ done
 - **Pattern matching**: Using shell patterns like .* for hidden files
 - **String extraction**: Getting specific parts of filenames
 
+### 9-to_file_or_not_to_file
+A Bash script that provides information about a file named "school" using file test operators and if-else statements.
+
+**Usage:**
+```bash
+chmod +x ./9-to_file_or_not_to_file
+./9-to_file_or_not_to_file
+```
+
+**Expected behavior:**
+When file doesn't exist:
+```
+school file does not exist
+```
+
+When file exists and is empty:
+```
+school file exists
+school file is empty
+school is a regular file
+```
+
+When file exists and is not empty:
+```
+school file exists
+school file is not empty
+school is a regular file
+```
+
+When file exists but is a directory:
+```
+school file exists
+school file is not empty
+```
+
+**Requirements:**
+- Uses if and else statements (case statement is forbidden)
+- First line: `#!/usr/bin/env bash`
+- Second line: Comment explaining the script's purpose
+- Tests file existence, emptiness, and file type
+- Prints appropriate messages based on file properties
+
+**Script structure:**
+```bash
+#!/usr/bin/env bash
+# This script provides information about the school file using file test operators
+if [ -e school ]
+then
+    echo "school file exists"
+    if [ -s school ]
+    then
+        echo "school file is not empty"
+    else
+        echo "school file is empty"
+    fi
+    if [ -f school ]
+    then
+        echo "school is a regular file"
+    fi
+else
+    echo "school file does not exist"
+fi
+```
+
+**Key concepts:**
+- **File test operators**: Special operators for testing file properties
+- **`-e`**: Tests if file exists (any type)
+- **`-s`**: Tests if file exists and is not empty (has size > 0)
+- **`-f`**: Tests if file is a regular file (not directory, link, etc.)
+- **Nested if statements**: Using if-else inside another if block
+- **Conditional execution**: Different actions based on file properties
+
+**File test operators used:**
+- **`[ -e file ]`**: True if file exists
+- **`[ -s file ]`**: True if file exists and has size greater than zero
+- **`[ -f file ]`**: True if file exists and is a regular file
+- **Logic flow**: Check existence first, then properties only if file exists
+
+**Comparison with previous scripts:**
+- **Previous scripts**: Used arithmetic or string comparisons
+- **9-to_file_or_not_to_file**: Uses file system tests
+- **New concept**: File test operators for system file properties
+- **Practical application**: Common pattern in shell scripting for file validation
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on loops, conditions, and parsing in Bash scripting.
