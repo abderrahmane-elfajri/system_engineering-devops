@@ -121,6 +121,75 @@ ps auxf
 - **Process tree**: Shows parent-child relationships using ASCII art
 - **System processes**: Kernel threads shown in square brackets [name]
 
+### 2-show_your_bash_pid
+A Bash script that displays only the lines containing the word "bash" from the process list, helping identify Bash shell PIDs.
+
+**Usage:**
+```bash
+chmod +x ./2-show_your_bash_pid
+./2-show_your_bash_pid
+```
+
+**Expected output format:**
+```
+sylvain   4404  0.0  0.7  21432  4000 pts/0    Ss   03:32   0:00          \_ -bash
+sylvain   4477  0.0  0.2  11120  1352 pts/0    S+   03:40   0:00              \_ bash ./2-show_your_bash_PID
+sylvain   4479  0.0  0.1  10460   912 pts/0    S+   03:40   0:00                  \_ grep bash
+```
+
+**Requirements:**
+- Displays only lines containing the word "bash"
+- Cannot use pgrep command
+- Must use filtering with standard shell utilities
+- Third line must be: `# shellcheck disable=SC2009`
+- First line: `#!/usr/bin/env bash`
+- Second line: Comment explaining the script's purpose
+
+**Script structure:**
+```bash
+#!/usr/bin/env bash
+# This script displays lines containing the word bash from the process list
+# shellcheck disable=SC2009
+ps auxf | grep bash
+```
+
+**Key concepts:**
+- **Process filtering**: Using grep to filter specific processes
+- **Pipeline**: Combining ps and grep commands with | operator
+- **Pattern matching**: grep searches for "bash" in process command lines
+- **Shell utilities**: Standard Unix tools for text processing
+- **ShellCheck**: Code analysis tool for shell scripts
+
+**Command breakdown:**
+- **`ps auxf`**: Display all processes in user-oriented format with hierarchy
+- **`|`**: Pipe operator to pass output to next command
+- **`grep bash`**: Filter lines containing the word "bash"
+- **Result**: Only bash-related processes are shown
+
+**What you'll see:**
+- **Parent bash shell**: Your main interactive shell session
+- **Child bash processes**: Scripts currently running
+- **grep process**: The grep command itself (shows in output)
+- **Process hierarchy**: Indentation shows parent-child relationships
+
+**ShellCheck disable comment:**
+- **SC2009**: Warning about using ps with grep instead of pgrep
+- **Disabled**: ALX task specifically requires this approach
+- **Educational**: Shows common pattern before learning advanced alternatives
+- **Line 3**: Must be exactly `# shellcheck disable=SC2009`
+
+**Practical applications:**
+- **Finding shell PID**: Identify your main bash shell process
+- **Process debugging**: See which bash scripts are running
+- **Resource monitoring**: Check CPU/memory usage of bash processes
+- **Process management**: Get PIDs for sending signals to specific shells
+
+**Understanding the output:**
+- **First process**: Usually your main interactive shell (-bash)
+- **Second process**: The script itself (bash ./2-show_your_bash_pid)
+- **Third process**: The grep command (grep bash)
+- **PID identification**: Second column shows the Process ID
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on processes and signals in Linux systems.
