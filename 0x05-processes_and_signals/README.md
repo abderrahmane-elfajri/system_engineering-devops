@@ -341,6 +341,95 @@ done
 - **SIGKILL**: Force kill signal (cannot be caught)
 - **Process termination**: How to stop infinite loops safely
 
+### 5-dont_stop_me_now
+A Bash script that stops the 4-to_infinity_and_beyond process using the kill command.
+
+**Usage:**
+```bash
+chmod +x ./5-dont_stop_me_now
+./5-dont_stop_me_now
+```
+
+**Testing scenario:**
+Terminal #0 (Start the infinite loop):
+```bash
+./4-to_infinity_and_beyond
+To infinity and beyond
+To infinity and beyond
+To infinity and beyond
+To infinity and beyond
+Terminated
+```
+
+Terminal #1 (Kill the process):
+```bash
+./5-dont_stop_me_now
+```
+
+**Requirements:**
+- Must use the kill command
+- Must find the PID of the 4-to_infinity_and_beyond process
+- Terminates the running infinite loop process
+- First line: `#!/usr/bin/env bash`
+- Second line: Comment explaining the script's purpose
+
+**Script structure:**
+```bash
+#!/usr/bin/env bash
+# This script stops the 4-to_infinity_and_beyond process
+kill "$(pgrep -f "4-to_infinity_and_beyond")"
+```
+
+**Key concepts:**
+- **kill command**: Sends signals to processes to terminate them
+- **pgrep -f**: Finds processes by full command line (not just process name)
+- **Command substitution**: `$(command)` executes command and uses its output
+- **Process termination**: Programmatic way to stop processes
+- **Signal sending**: Default kill sends SIGTERM (graceful termination)
+
+**Command breakdown:**
+- **`pgrep -f "4-to_infinity_and_beyond"`**: Finds PID of process containing this string
+- **`-f`**: Search full command line, not just process name
+- **`$()`**: Command substitution - executes pgrep and returns PID
+- **`kill`**: Sends SIGTERM signal to the process ID
+- **`"$(...)"`**: Quotes ensure proper handling of PID
+
+**Why use pgrep -f:**
+- **Full command search**: Matches script name in command line
+- **Precise targeting**: Finds exact process we want to kill
+- **Dynamic PID**: Works regardless of what PID the process has
+- **Automated**: No need to manually find PID first
+
+**Process termination flow:**
+1. **pgrep -f**: Searches for process containing "4-to_infinity_and_beyond"
+2. **Returns PID**: Gets the process ID number
+3. **kill**: Sends SIGTERM signal to that PID
+4. **Process stops**: The infinite loop terminates gracefully
+
+**Signal types:**
+- **SIGTERM (15)**: Default kill signal, graceful termination
+- **SIGKILL (9)**: Force kill, cannot be caught or ignored
+- **SIGINT (2)**: Interrupt signal (same as Ctrl+C)
+- **SIGSTOP (19)**: Suspend process (cannot be caught)
+
+**Alternative approaches:**
+- **Manual method**: `ps aux | grep 4-to_infinity_and_beyond` then `kill PID`
+- **pkill command**: `pkill -f "4-to_infinity_and_beyond"`
+- **killall command**: `killall 4-to_infinity_and_beyond`
+
+**Practical applications:**
+- **Process management**: Stop runaway or stuck processes
+- **Service control**: Terminate specific services programmatically
+- **Script automation**: Stop processes as part of larger scripts
+- **System maintenance**: Clean up processes during maintenance
+- **Emergency situations**: Stop processes consuming too many resources
+
+**Safety considerations:**
+- **Process identification**: Make sure you're killing the right process
+- **Signal choice**: Use SIGTERM first, SIGKILL as last resort
+- **Error handling**: Check if process exists before trying to kill
+- **Permissions**: May need appropriate permissions to kill processes
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on processes and signals in Linux systems.
