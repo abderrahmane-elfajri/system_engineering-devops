@@ -223,6 +223,75 @@ done
 - **3-until_best_school**: Simple until loop, no conditions
 - **4-if_9_say_hi**: While loop + conditional logic for dynamic behavior
 
+### 5-4_bad_luck_8_is_your_chance
+A Bash script that loops from 1 to 10 and displays different messages based on the iteration number using if-elif-else statements.
+
+**Usage:**
+```bash
+chmod +x ./5-4_bad_luck_8_is_your_chance
+./5-4_bad_luck_8_is_your_chance
+```
+
+**Expected output:**
+```
+Best School
+Best School
+Best School
+bad luck
+Best School
+Best School
+Best School
+good luck
+Best School
+Best School
+```
+
+**Requirements:**
+- Uses a while loop (for and until loops are forbidden)
+- Uses if, elif, and else statements for conditional logic
+- First line: `#!/usr/bin/env bash`
+- Second line: Comment explaining the script's purpose
+- Displays "bad luck" for the 4th iteration
+- Displays "good luck" for the 8th iteration
+- Displays "Best School" for all other iterations
+
+**Script structure:**
+```bash
+#!/usr/bin/env bash
+# This script loops from 1 to 10 and displays different messages based on the iteration
+i=1
+while [ $i -le 10 ]
+do
+    if [ $i -eq 4 ]
+    then
+        echo "bad luck"
+    elif [ $i -eq 8 ]
+    then
+        echo "good luck"
+    else
+        echo "Best School"
+    fi
+    (($i++))
+done
+```
+
+**Key concepts:**
+- **If-elif-else structure**: Multiple conditional branches in single construct
+- **Elif statement**: "else if" - checked only if previous conditions are false
+- **Else clause**: Default case when no other conditions match
+- **Multiple conditions**: `[ $i -eq 4 ]` and `[ $i -eq 8 ]` for specific iterations
+- **Conditional branching**: Different outputs based on loop counter value
+
+**Cultural significance:**
+- **Number 4**: Considered unlucky in Chinese culture (sounds like "death")
+- **Number 8**: Considered lucky in Chinese culture (sounds like "prosperity")
+- **Script logic**: Reflects these cultural beliefs about numbers
+
+**Comparison with previous scripts:**
+- **4-if_9_say_hi**: Simple if statement (single condition)
+- **5-4_bad_luck_8_is_your_chance**: Complex if-elif-else (multiple conditions)
+- **Progression**: From simple loops → single conditions → multiple conditions
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on loops, conditions, and parsing in Bash scripting.
