@@ -430,6 +430,101 @@ kill "$(pgrep -f "4-to_infinity_and_beyond")"
 - **Error handling**: Check if process exists before trying to kill
 - **Permissions**: May need appropriate permissions to kill processes
 
+### 6-stop_me_if_you_can
+A Bash script that stops the 4-to_infinity_and_beyond process using an alternative method to kill/killall.
+
+**Usage:**
+```bash
+chmod +x ./6-stop_me_if_you_can
+./6-stop_me_if_you_can
+```
+
+**Testing scenario:**
+Terminal #0 (Start the infinite loop):
+```bash
+./4-to_infinity_and_beyond
+To infinity and beyond
+To infinity and beyond
+To infinity and beyond
+To infinity and beyond
+Terminated
+```
+
+Terminal #1 (Stop the process):
+```bash
+./6-stop_me_if_you_can
+```
+
+**Requirements:**
+- Cannot use kill command
+- Cannot use killall command
+- Must find and stop the 4-to_infinity_and_beyond process
+- First line: `#!/usr/bin/env bash`
+- Second line: Comment explaining the script's purpose
+
+**Script structure:**
+```bash
+#!/usr/bin/env bash
+# This script stops the 4-to_infinity_and_beyond process
+pkill -f "4-to_infinity_and_beyond"
+```
+
+**Key concepts:**
+- **pkill command**: Process kill - terminates processes by name pattern
+- **Alternative method**: Different approach from kill/killall commands
+- **Pattern matching**: Uses -f flag to search full command line
+- **Direct termination**: Single command to find and kill process
+- **Process management**: Alternative tools for process control
+
+**Command breakdown:**
+- **`pkill`**: Process kill utility for terminating processes by pattern
+- **`-f`**: Search full command line, not just process name
+- **`"4-to_infinity_and_beyond"`**: Pattern to match in process command line
+- **Result**: Terminates matching process directly
+
+**Advantages of pkill:**
+- **Single command**: Combines search and kill in one operation
+- **Pattern matching**: Flexible process identification
+- **No PID required**: Don't need to find PID first
+- **Efficient**: Direct process termination
+- **Versatile**: Can kill multiple matching processes
+
+**Comparison with previous methods:**
+- **Task 5**: `kill "$(pgrep -f "...")"`  - Two-step process (find PID, then kill)
+- **Task 6**: `pkill -f "..."`  - Single-step process (find and kill together)
+- **Evolution**: From manual PID lookup to integrated process control
+
+**Alternative methods (not used here):**
+- **kill + pgrep**: Find PID then kill (previous task)
+- **killall**: Kill by process name (forbidden)
+- **skill**: System V kill command (deprecated)
+- **/proc filesystem**: Direct signal writing (advanced)
+
+**Signal behavior:**
+- **Default signal**: pkill sends SIGTERM (graceful termination)
+- **Signal options**: Can specify different signals with -SIGNAL
+- **Process response**: Process can catch and handle SIGTERM
+- **Termination**: Process stops execution and exits
+
+**Pattern matching details:**
+- **-f flag**: Searches entire command line including arguments
+- **Exact match**: Finds processes containing the exact string
+- **Case sensitive**: Pattern matching is case-sensitive
+- **Multiple matches**: Will kill all matching processes
+
+**Practical applications:**
+- **Service management**: Stop services by name pattern
+- **Script automation**: Terminate processes in automated scripts
+- **System maintenance**: Clean up processes during maintenance
+- **Emergency control**: Quick process termination
+- **Batch operations**: Kill multiple related processes at once
+
+**Safety considerations:**
+- **Pattern precision**: Make sure pattern matches only intended processes
+- **Multiple matches**: Be aware pkill can kill multiple processes
+- **Process verification**: Check what processes match before killing
+- **Testing**: Test patterns carefully to avoid unintended termination
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on processes and signals in Linux systems.
