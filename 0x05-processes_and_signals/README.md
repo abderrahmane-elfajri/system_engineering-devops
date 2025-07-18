@@ -190,6 +190,73 @@ ps auxf | grep bash
 - **Third process**: The grep command (grep bash)
 - **PID identification**: Second column shows the Process ID
 
+### 3-show_your_bash_pid_made_easy
+A Bash script that displays the PID and process name of processes containing "bash" using a more direct approach.
+
+**Usage:**
+```bash
+chmod +x ./3-show_your_bash_pid_made_easy
+./3-show_your_bash_pid_made_easy
+```
+
+**Expected output format:**
+```
+4404 bash
+4555 bash
+```
+
+**Requirements:**
+- Cannot use the ps command
+- Must use a different command that queries processes by name
+- Output format: PID process_name (space-separated)
+- Shows only processes whose name contains "bash"
+- First line: `#!/usr/bin/env bash`
+- Second line: Comment explaining the script's purpose
+
+**Script structure:**
+```bash
+#!/usr/bin/env bash
+# This script displays PID and process name of processes whose name contains bash
+pgrep -l bash
+```
+
+**Key concepts:**
+- **pgrep command**: Process grep - searches for processes by name
+- **-l flag**: List format showing PID and process name
+- **Direct querying**: More efficient than ps + grep combination
+- **Pattern matching**: Finds processes containing "bash" in their name
+- **Concise output**: Shows only PID and process name
+
+**Command breakdown:**
+- **`pgrep`**: Process grep utility for finding processes by name
+- **`-l`**: List format (PID process_name)
+- **`bash`**: Pattern to search for in process names
+- **Result**: Clean output with PID and process name only
+
+**Advantages over ps + grep:**
+- **More efficient**: Direct process query instead of full listing + filtering
+- **Cleaner output**: No extra information like CPU, memory usage
+- **Purpose-built**: Designed specifically for finding processes by name
+- **No false positives**: Won't show grep process itself
+- **Simpler syntax**: Single command instead of pipeline
+
+**What you'll see:**
+- **Parent bash shell**: Your main interactive shell session
+- **Script process**: The current bash script running
+- **Variable PIDs**: Process IDs change each time script runs
+- **Consistent format**: Always "PID process_name"
+
+**Practical applications:**
+- **Quick PID lookup**: Fast way to find specific process IDs
+- **Automation scripts**: Easy to parse output for further processing
+- **Process monitoring**: Check if specific processes are running
+- **System administration**: Identify processes for management tasks
+
+**Comparison with previous task:**
+- **Task 2**: `ps auxf | grep bash` - Full process info with filtering
+- **Task 3**: `pgrep -l bash` - Direct, concise process lookup
+- **Evolution**: From general-purpose to specialized tools
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on processes and signals in Linux systems.
