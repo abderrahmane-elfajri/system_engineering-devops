@@ -292,6 +292,94 @@ done
 - **5-4_bad_luck_8_is_your_chance**: Complex if-elif-else (multiple conditions)
 - **Progression**: From simple loops → single conditions → multiple conditions
 
+### 6-superstitious_numbers
+A Bash script that displays numbers from 1 to 20 with additional "bad luck" messages for specific superstitious numbers using a case statement.
+
+**Usage:**
+```bash
+chmod +x ./6-superstitious_numbers
+./6-superstitious_numbers
+```
+
+**Expected output:**
+```
+1
+2
+3
+4
+bad luck from China
+5
+6
+7
+8
+9
+bad luck from Japan
+10
+11
+12
+13
+14
+15
+16
+17
+bad luck from Italy
+18
+19
+20
+```
+
+**Requirements:**
+- Uses a while loop (for and until loops are forbidden)
+- Uses a case statement for conditional logic
+- First line: `#!/usr/bin/env bash`
+- Second line: Comment explaining the script's purpose
+- Displays numbers 1-20
+- Shows "bad luck from China" after number 4
+- Shows "bad luck from Japan" after number 9
+- Shows "bad luck from Italy" after number 17
+
+**Script structure:**
+```bash
+#!/usr/bin/env bash
+# This script displays numbers from 1 to 20 with bad luck messages on specific iterations
+i=1
+while [ $i -le 20 ]
+do
+    echo $i
+    case $i in
+        4)
+            echo "bad luck from China"
+            ;;
+        9)
+            echo "bad luck from Japan"
+            ;;
+        17)
+            echo "bad luck from Italy"
+            ;;
+    esac
+    (($i++))
+done
+```
+
+**Key concepts:**
+- **Case statement**: Alternative to if-elif-else for multiple value matching
+- **Case syntax**: `case $variable in pattern) commands ;; esac`
+- **Pattern matching**: Exact value matching (4, 9, 17)
+- **Double semicolon**: `;;` terminates each case branch
+- **Esac**: "case" spelled backwards, closes the case statement
+- **No default case**: Only specific patterns have actions
+
+**Cultural significance:**
+- **Number 4 (China)**: Sounds like "death" in Chinese (四 sì vs 死 sǐ)
+- **Number 9 (Japan)**: Sounds like "suffering" in Japanese (九 ku vs 苦 ku)
+- **Number 17 (Italy)**: Considered unlucky in Italian culture (related to Roman numerals XVII)
+
+**Comparison with previous conditional scripts:**
+- **4-if_9_say_hi**: Single if condition
+- **5-4_bad_luck_8_is_your_chance**: If-elif-else structure
+- **6-superstitious_numbers**: Case statement for cleaner multiple value matching
+- **Progression**: if → if-elif-else → case (increasing complexity and readability)
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on loops, conditions, and parsing in Bash scripting.
