@@ -380,6 +380,66 @@ done
 - **6-superstitious_numbers**: Case statement for cleaner multiple value matching
 - **Progression**: if → if-elif-else → case (increasing complexity and readability)
 
+### 8-for_ls
+A Bash script that displays the content of the current directory in list format, showing only the part of filenames after the first dash (-).
+
+**Usage:**
+```bash
+chmod +x ./8-for_ls
+./8-for_ls
+```
+
+**Example:**
+If directory contains: `100-read_and_cut`, `1-for_best_school`, `6-superstitious_numbers`
+
+**Expected output:**
+```
+read_and_cut
+for_best_school
+superstitious_numbers
+```
+
+**Requirements:**
+- Uses a for loop (while and until loops are forbidden)
+- Displays current directory content in list format
+- Shows only the part after the first dash (-)
+- Does not display hidden files (starting with .)
+- First line: `#!/usr/bin/env bash`
+- Second line: Comment explaining the script's purpose
+
+**Script structure:**
+```bash
+#!/usr/bin/env bash
+# This script displays the content of current directory in list format, showing only the part after first dash
+for file in *
+do
+    if [[ ! $file == .* ]]
+    then
+        echo $file | cut -d'-' -f2-
+    fi
+done
+```
+
+**Key concepts:**
+- **For loop with glob**: `for file in *` iterates through all files in current directory
+- **Glob pattern**: `*` matches all files (except hidden ones starting with .)
+- **Hidden file check**: `[[ ! $file == .* ]]` excludes files starting with dot
+- **String manipulation**: `cut -d'-' -f2-` extracts text after first dash
+- **Cut command**: `-d'-'` sets dash as delimiter, `-f2-` gets field 2 to end
+- **Pipe operation**: `echo $file | cut` passes filename to cut command
+
+**Command breakdown:**
+- **`for file in *`**: Loop through all visible files in current directory
+- **`[[ ! $file == .* ]]`**: Double bracket test to exclude hidden files
+- **`echo $file | cut -d'-' -f2-`**: Extract and display part after first dash
+- **`cut -d'-' -f2-`**: Use dash as delimiter, get fields from 2 to end
+
+**Text processing concepts:**
+- **Field separation**: Breaking text into parts using delimiters
+- **Pipeline**: Chaining commands with | operator
+- **Pattern matching**: Using shell patterns like .* for hidden files
+- **String extraction**: Getting specific parts of filenames
+
 ## About
 
 This is part of the ALX System Engineering & DevOps curriculum, focusing on loops, conditions, and parsing in Bash scripting.

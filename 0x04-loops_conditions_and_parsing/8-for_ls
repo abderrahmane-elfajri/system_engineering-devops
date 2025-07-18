@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# This script displays the content of current directory in list format, showing only the part after first dash
+for file in *
+do
+    if [[ ! $file == .* ]]
+    then
+        echo $file | cut -d'-' -f2-
+    fi
+done
